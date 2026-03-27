@@ -5,7 +5,8 @@
 
 #include <iostream>
 #include <string>
-#include <random>
+#include <cstdlib>
+#include <ctime>
 using namespace std;
 
 class board{
@@ -52,17 +53,15 @@ class board{
 
 int main(){
 	//generates random number
-	random_device rd;
-	mt19937 gen(rd());
-	uniform_int_distribution<> distrib(1,2);
-	int random_number=distrib(gen);
+	srand(time(0));
+	int randomNum=rand()%2+1;
 	
 	//creates varibles for the user and computer
 	string user;
 	string computer;
 	
 	//sets the user as X or O
-	if(random_number==1){
+	if(randomNum==1){
 		user=" X ";
 		computer=" O ";
 	}//end if
@@ -89,7 +88,7 @@ int main(){
 	
 	//creates a variable to count the number of moves made
 	int moves=0;
-	
+
 	while(newBoard.winCondition(user)==false && newBoard.winCondition(computer)==false){
 		//prints the board
 		newBoard.printBoard();
@@ -111,6 +110,21 @@ int main(){
 		else{
 			cout<<"\nSpace filled\nEnter another number"<<endl;
 		}//end else
+		
+		if(newBoard.winCondition(user)==false){
+			int compMove;
+			do{
+				compMove=rand()%9+1;
+				int r=(compMove-1)/3;
+				int c=(compMove-1)%3;
+				
+				if(newBoard.board[r][c]!=user && newBoard.board[r][c]!=computer){
+					newBoard.board[r][c]=computer;
+					moves++;//increases the move counter
+					break;
+				}//end if
+			}while(true);//end do while loop
+		}//end if
 		
 		//checks if the move counter has hit 9, ends the game with a draw if true
 		if(moves==9){
