@@ -121,7 +121,35 @@ class board3D: public board{
 			}//end for loop
 			
 			//diagonals across layers
-			//small change
+			for(int i=0;i<3;i++){
+				if(board3D[0][i][0]==p && board3D[1][i][1]==p && board3D[2][i][2]==p){
+					return true;
+				}//end if
+				if(board3D[2][i][0]==p && board3D[1][i][1]==p && board3D[0][i][2]==p){
+					return true;
+				}//end if
+				
+				if(board3D[0][0][i]==p && board3D[1][1][i]==p && board3D[2][2][i]==p){
+					return true;
+				}//end if
+				if(board3D[2][0][i]==p && board3D[1][1][i]==p && board3D[0][2][i]==p){
+					return true;
+				}//end if
+			}//end for loop
+			
+			//diagonals through the cube
+			if(board3D[0][0][0]==p && board3D[1][1][1]==p && board3D[2][2][2]==p){
+				return true;
+			}//end if
+			if(board3D[0][0][2]==p && board3D[1][1][1]==p && board3D[2][2][0]==p){
+				return true;
+			}//end if
+			if(board3D[0][2][0]==p && board3D[1][1][1]==p && board3D[2][0][2]==p){
+				return true;
+			}//end if
+			if(board3D[0][2][2]==p && board3D[1][1][1]==p && board3D[2][0][0]==p){
+				return true;
+			}//end if
 			
 			return false;
 		}//end winCondition()
