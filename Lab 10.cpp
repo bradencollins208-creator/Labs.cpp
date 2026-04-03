@@ -121,6 +121,7 @@ class board3D: public board{
 			}//end for loop
 			
 			//diagonals across layers
+			//small change
 			
 			return false;
 		}//end winCondition()
