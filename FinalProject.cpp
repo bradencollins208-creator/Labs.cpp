@@ -27,22 +27,9 @@ class symptomChecker{
 		}//end printTable()
 		
 		void genRandSymp(){
-			//seeds for random numbers
-			srand(time(0));
-			
-			bool fever;
-			bool cough;
-			bool shortBreath;
-			bool runnyNose;
-			bool Headache;
-			bool sneezing;
-			bool fatigue;
 			
 			
-			//generates a random number
-			int randomNum=rand()%7+1;
-			
-			cout<<randomNum<<endl;
+			//cout<<randomNum<<endl;
 		}//end genRandSymp()
 		
 };//end symptomChecker class
@@ -76,9 +63,35 @@ int main(){
 	int other=0;
 	
 	//generates random symptoms
+	bool fever;
+	bool cough;
+	bool shortBreath;
+	bool runnyNose;
+	bool Headache;
+	bool sneezing;
+	bool fatigue;
+	
+	bool symptom;
+	
+	//seeds for random numbers
+	srand(time(0));
+	
 	for(int i=0;i<iChoice;i++){
-		test.genRandSymp();
+		for(int k=0;k<7;k++){
+			//generates a random number
+			int randomNum=rand()%2;
+			if(randomNum==0){
+				symptom=false;
+			}
+			else{
+				symptom=true;
+			}
+		}
+		fever=symptom;
+		cough=symptom;
 	}
+	cout<<fever<<endl;
+	cout<<cough<<endl;
 	
 	cout<<covid<<" patients have symptoms of COVID-19"<<endl;
 	cout<<cold<<" patients have symptoms of Cold"<<endl;
