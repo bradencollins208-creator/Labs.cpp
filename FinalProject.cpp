@@ -26,10 +26,50 @@ class symptomChecker{
 			cout<<"========================================================================="<<endl;
 		}//end printTable()
 		
-		void genRandSymp(){
+		void genRandSymp(int count,int* condition1,int* condition2,int* condition3,int* condition4){
+			//generates random symptoms
+			bool fever;
+			bool cough;
+			bool shortBreath;
+			bool runnyNose;
+			bool headache;
+			bool sneezing;
+			bool fatigue;
 			
+			bool symptom[7];
 			
-			//cout<<randomNum<<endl;
+			for(int i=0;i<count;i++){
+				for(int k=0;k<7;k++){
+					//generates a random number
+					int randomNum=rand()%2;
+					if(randomNum==0){
+						symptom[k]=false;
+					}//end if
+					else{
+						symptom[k]=true;
+					}//end else
+				}//end for loop
+				fever=symptom[0];
+				cough=symptom[1];
+				shortBreath=symptom[2];
+				runnyNose=symptom[3];
+				headache=symptom[4];
+				sneezing=symptom[5];
+				fatigue=symptom[6];
+				
+				if(fever==true && cough==true && shortBreath==true){
+					(*condition1)++;
+				}//end if
+				else if(runnyNose==true && sneezing==true){
+					(*condition2)++;
+				}//end else if
+				else if(fever==true && cough==true && headache==true && fatigue==true){
+					(*condition3)++;
+				}//end else if
+				else{
+					(*condition4)++;
+				}//end else
+			}//end for loop
 		}//end genRandSymp()
 		
 };//end symptomChecker class
@@ -57,41 +97,14 @@ int main(){
 	cout<<"================================"<<endl;
 	cout<<"Symptom Checker..."<<endl;
 	
+	//seeds for random numbers
+	srand(time(0));
+	
 	int covid=0;
 	int cold=0;
 	int flu=0;
 	int other=0;
-	
-	//generates random symptoms
-	bool fever;
-	bool cough;
-	bool shortBreath;
-	bool runnyNose;
-	bool Headache;
-	bool sneezing;
-	bool fatigue;
-	
-	bool symptom;
-	
-	//seeds for random numbers
-	srand(time(0));
-	
-	for(int i=0;i<iChoice;i++){
-		for(int k=0;k<7;k++){
-			//generates a random number
-			int randomNum=rand()%2;
-			if(randomNum==0){
-				symptom=false;
-			}
-			else{
-				symptom=true;
-			}
-		}
-		fever=symptom;
-		cough=symptom;
-	}
-	cout<<fever<<endl;
-	cout<<cough<<endl;
+	test.genRandSymp(iChoice,&covid,&cold,&flu,&other);
 	
 	cout<<covid<<" patients have symptoms of COVID-19"<<endl;
 	cout<<cold<<" patients have symptoms of Cold"<<endl;
@@ -99,10 +112,10 @@ int main(){
 	cout<<other<<" patients may have some other illness"<<endl;
 	cout<<"================================"<<endl;
 	
-	int covidPerc=covid/iChoice;
-	int coldPerc=cold/iChoice;
-	int fluPerc=flu/iChoice;
-	int otherPerc=other/iChoice;
+	int covidPerc=(covid/iChoice)*100;
+	int coldPerc=(cold/iChoice)*100;
+	int fluPerc=(flu/iChoice)*100;
+	int otherPerc=(other/iChoice)*100;
 	
 	cout<<"\nPercentage of each illness:"<<endl;
 	cout<<"COVID-19:\t["<<covidPerc<<"%]";
