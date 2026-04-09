@@ -72,6 +72,17 @@ class symptomChecker{
 			}//end for loop
 		}//end genRandSymp()
 		
+		int conditionPercenages(int condition, int count){
+			int result=((float) condition/(float) count)*(int) 100;
+			return result;
+		}//end conditionPercenages()
+		
+		void printConditionPerc(string condition, int conditionPerc){
+			//cout<<condition<<":\t["<<conditionPerc<<"%]";
+			//for(int i=0;i<conditionPerc;i++){
+			//	cout<<"+";
+			//}//end for loop
+		}//end printConditionPerc()
 };//end symptomChecker class
 
 int main(){
@@ -112,10 +123,11 @@ int main(){
 	cout<<other<<" patients may have some other illness"<<endl;
 	cout<<"================================"<<endl;
 	
-	int covidPerc=(covid/iChoice)*100;
-	int coldPerc=(cold/iChoice)*100;
-	int fluPerc=(flu/iChoice)*100;
-	int otherPerc=(other/iChoice)*100;
+	//int covidPerc=((float) covid/(float) iChoice)*(int) 100;
+	int covidPerc=test.conditionPercenages(covid,iChoice);
+	int coldPerc=test.conditionPercenages(cold,iChoice);
+	int fluPerc=test.conditionPercenages(flu,iChoice);
+	int otherPerc=test.conditionPercenages(other,iChoice);
 	
 	cout<<"\nPercentage of each illness:"<<endl;
 	cout<<"COVID-19:\t["<<covidPerc<<"%]";
@@ -123,15 +135,15 @@ int main(){
 		cout<<"+";
 	}
 	cout<<"\nCold:\t\t["<<coldPerc<<"%]";
-	for(int i=0;i<<coldPerc;i++){
+	for(int i=0;i<coldPerc;i++){
 		cout<<"+";
 	}
 	cout<<"\nFlu:\t\t["<<fluPerc<<"%]";
-	for(int i=0;i<<fluPerc;i++){
+	for(int i=0;i<fluPerc;i++){
 		cout<<"+";
 	}
 	cout<<"\nOther illness:\t["<<otherPerc<<"%]";
-	for(int i=0;i<<otherPerc;i++){
+	for(int i=0;i<otherPerc;i++){
 		cout<<"+";
 	}
 	
