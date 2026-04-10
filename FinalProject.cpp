@@ -27,43 +27,21 @@ class symptomChecker{
 		}//end printTable()
 		
 		void genRandSymp(int count,int* condition1,int* condition2,int* condition3,int* condition4){
-			//generates random symptoms
-			bool fever;
-			bool cough;
-			bool shortBreath;
-			bool runnyNose;
-			bool headache;
-			bool sneezing;
-			bool fatigue;
-			
-			bool symptom[7];
+			bool symptoms[7];
 			
 			for(int i=0;i<count;i++){
 				for(int k=0;k<7;k++){
 					//generates a random number
-					int randomNum=rand()%2;
-					if(randomNum==0){
-						symptom[k]=false;
-					}//end if
-					else{
-						symptom[k]=true;
-					}//end else
+					symptoms[k]=rand()%2;
 				}//end for loop
-				fever=symptom[0];
-				cough=symptom[1];
-				shortBreath=symptom[2];
-				runnyNose=symptom[3];
-				headache=symptom[4];
-				sneezing=symptom[5];
-				fatigue=symptom[6];
 				
-				if(fever==true && cough==true && shortBreath==true){
+				if(symptoms[0]==true && symptoms[1]==true && symptoms[2]==true){
 					(*condition1)++;
 				}//end if
-				else if(runnyNose==true && sneezing==true){
+				else if(symptoms[3]==true && symptoms[5]==true){
 					(*condition2)++;
 				}//end else if
-				else if(fever==true && cough==true && headache==true && fatigue==true){
+				else if(symptoms[0]==true && symptoms[1]==true && symptoms[4]==true && symptoms[6]==true){
 					(*condition3)++;
 				}//end else if
 				else{
@@ -72,16 +50,16 @@ class symptomChecker{
 			}//end for loop
 		}//end genRandSymp()
 		
-		int conditionPercenages(int condition, int count){
-			int result=((float) condition/(float) count)*(int) 100;
+		int conditionPercentages(int condition, int count){
+			int result=((condition * 100)/count);
 			return result;
 		}//end conditionPercenages()
 		
 		void printConditionPerc(string condition, int conditionPerc){
-			//cout<<condition<<":\t["<<conditionPerc<<"%]";
-			//for(int i=0;i<conditionPerc;i++){
-			//	cout<<"+";
-			//}//end for loop
+			cout<<condition<<"["<<conditionPerc<<"%]";
+			for(int i=0;i<conditionPerc;i++){
+				cout<<"+";
+			}//end for loop
 		}//end printConditionPerc()
 };//end symptomChecker class
 
@@ -99,7 +77,7 @@ int main(){
 	cin>>iChoice;
 	
 	//checks that the choice is greater than 0
-	while(iChoice<0){
+	while(iChoice<=0){
 		cout<<"Invalid number\n";
 		cout<<"Please enter a positive number: ";
 		cin>>iChoice;
@@ -123,29 +101,11 @@ int main(){
 	cout<<other<<" patients may have some other illness"<<endl;
 	cout<<"================================"<<endl;
 	
-	//int covidPerc=((float) covid/(float) iChoice)*(int) 100;
-	int covidPerc=test.conditionPercenages(covid,iChoice);
-	int coldPerc=test.conditionPercenages(cold,iChoice);
-	int fluPerc=test.conditionPercenages(flu,iChoice);
-	int otherPerc=test.conditionPercenages(other,iChoice);
-	
 	cout<<"\nPercentage of each illness:"<<endl;
-	cout<<"COVID-19:\t["<<covidPerc<<"%]";
-	for(int i=0;i<covidPerc;i++){
-		cout<<"+";
-	}
-	cout<<"\nCold:\t\t["<<coldPerc<<"%]";
-	for(int i=0;i<coldPerc;i++){
-		cout<<"+";
-	}
-	cout<<"\nFlu:\t\t["<<fluPerc<<"%]";
-	for(int i=0;i<fluPerc;i++){
-		cout<<"+";
-	}
-	cout<<"\nOther illness:\t["<<otherPerc<<"%]";
-	for(int i=0;i<otherPerc;i++){
-		cout<<"+";
-	}
+	test.printConditionPerc("COVID-19:\t",test.conditionPercentages(covid,iChoice));
+	test.printConditionPerc("\nCold:\t\t",test.conditionPercentages(cold,iChoice));
+	test.printConditionPerc("\nFlu:\t\t",test.conditionPercentages(flu,iChoice));
+	test.printConditionPerc("\nOther illness:\t",test.conditionPercentages(other,iChoice));
 	
 	return 0;
 }
